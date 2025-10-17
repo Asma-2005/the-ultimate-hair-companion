@@ -1,121 +1,92 @@
-/* Spa-Inspired Color Palette */
-:root {
-  --spa-primary: #70D9D9;
-  --spa-secondary: #66D9D9;
-  --spa-accent: #4ECDC4;
-  --spa-light: #B0E0E6;
-  --spa-dark: #2C3E50;
-  --spa-green: #2ECC71;
-  --spa-gradient: linear-gradient(135deg, #70D9D9, #66D9D9, #4ECDC4);
-  --spa-natural: #27AE60;
-}
+/*
+ * Gliss Recommender Styles
+ * This file consolidates all custom styles, keyframe animations,
+ * and base utility classes for the React components.
+ */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ---------------------------------- */
+/* 1. Base Styles and Font Definition */
+/* ---------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: var(--spa-gradient);
-  min-height: 100vh;
-  color: var(--spa-dark);
+    font-family: 'Inter', sans-serif;
+    background-color: #F9FAFB; /* Light Grey background for professionalism */
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.App {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* ---------------------------------------------------- */
+/* 2. Custom Tailwind Classes & Henkel Color Definitions */
+/* ---------------------------------------------------- */
+
+/* Custom Gliss Colors (Based on Henkel Palette) */
+.bg-gliss-red { background-color: #E21B32; }
+.text-gliss-red { color: #E21B32; }
+.border-gliss-red { border-color: #E21B32; }
+.hover\:bg-gliss-red-dark:hover { background-color: #C8182D; }
+
+.bg-gliss-gold-light { background-color: #FFF9E0; }
+.border-gliss-gold { border-color: #FFD700; }
+.text-gliss-gold { color: #FFD700; }
+
+.text-warm-grey-dark { color: #1F2937; } /* Used for primary dark text */
+
+/* Shadows for a premium, high-contrast feel */
+.shadow-gliss-deep { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+.shadow-red-strong { box-shadow: 0 10px 15px -3px rgba(226, 27, 50, 0.4); }
+
+/* ------------------------------------------- */
+/* 3. Gamified & Component-Specific Styling */
+/* ------------------------------------------- */
+
+/* CHAT BUBBLES */
+
+/* Agent Bubble (White/Card Look) */
+.agent-bubble {
+    background-color: #FFFFFF;
+    border-radius: 1.5rem 1.5rem 1.5rem 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* Global Button Styles */
-.btn-primary {
-  background: var(--spa-gradient);
-  color: white;
-  border: none;
-  padding: 15px 30px;
-  border-radius: 25px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(112, 217, 217, 0.3);
+/* User Bubble (Gliss Red) */
+.user-bubble {
+    background-color: #E21B32;
+    color: #FFFFFF;
+    border-radius: 1.5rem 1.5rem 0.5rem 1.5rem;
+    padding: 0.75rem; /* Ensure consistent padding with Tailwind classes */
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(112, 217, 217, 0.4);
+/* GAMIFIED CARDS (Phase Transitions, etc.) */
+.gamified-card {
+    background-color: #FFF9E0;
+    border: 2px solid #FFD700;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.btn-secondary {
-  background: transparent;
-  color: var(--spa-primary);
-  border: 2px solid var(--spa-primary);
-  padding: 15px 30px;
-  border-radius: 25px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+/* GAMIFIED PROGRESS INDICATORS */
+
+/* Pulse effect for active elements (like the 'thinking' indicator) */
+.step-icon-pulse {
+    animation: pulse-ring 1s cubic-bezier(0.2, 0, 0.8, 1) infinite;
 }
 
-.btn-secondary:hover {
-  background: var(--spa-primary);
-  color: white;
-  transform: translateY(-2px);
+@keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.1); opacity: 0; }
 }
 
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* ------------------------------------------- */
+/* 4. Product Specific Color Fallbacks (Tailwind Classes) */
+/* ------------------------------------------- */
+/* These map to the color classes used in constants.js */
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(112, 217, 217, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(112, 217, 217, 0.6);
-  }
-}
-
-.animate-fadeInUp {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.animate-pulse {
-  animation: pulse 2s infinite;
-}
-
-.animate-glow {
-  animation: glow 2s infinite;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .btn-primary,
-  .btn-secondary {
-    padding: 12px 24px;
-    font-size: 14px;
-  }
-}
+.bg-gliss-product-ultimate-repair { background-color: #1F2937; } /* Warm Grey Dark */
+.bg-gliss-product-total-repair { background-color: #E21B32; }   /* Gliss Red */
+.bg-gliss-product-oil-nutritive { background-color: #F59E0B; } /* Tailwind Amber-500 for Gold Look */
+.bg-gliss-product-aqua-revive { background-color: #64B5F6; }   /* Soft Blue */
+.bg-gliss-product-supreme-length { background-color: #8B5CF6; } /* Tailwind Violet-500 for Purple Look */
